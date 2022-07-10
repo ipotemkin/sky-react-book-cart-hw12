@@ -1,33 +1,20 @@
-import styled from "styled-components"
+import * as S from "./styles"
+import { useThemeContext } from "../../context/theme"
 
-const ResetButtonStyle = styled.button`
-margin: 16px;
-padding: 10px 16px 10px 16px;
-border: 1px solid ${(props) => props.color || 'green'};
-border-radius: 5px;
-background: none;
-color: ${(props) => props.color || 'green'};
 
-:hover {
-    cursor: pointer;
-}
+const ResetButton = ({text, onClick, disabled}) => {
+  const theme = useThemeContext()
 
-:disabled {
-    cursor: not-allowed;
-    color: grey;
-    border-color: grey;
-}
-`
-
-const ResetButton = ({color, text, onClick, disabled}) => (
-    <ResetButtonStyle
-        type="button"
-        color={color}
-        onClick={onClick}
-        disabled={disabled}
+  return (
+    <S.ResetButton
+      type="button"
+      color={theme.color}
+      onClick={onClick}
+      disabled={disabled}
     >
-        {text}
-    </ResetButtonStyle>
-)
+      {text}
+    </S.ResetButton>
+  )
+}
 
 export default ResetButton

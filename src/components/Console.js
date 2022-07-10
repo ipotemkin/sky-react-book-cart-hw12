@@ -3,6 +3,7 @@
 
 import { useState, useRef } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useThemeContext } from '../context/theme'
 import Line from './Line'
 import ResetButton from './reset-button'
 
@@ -28,7 +29,8 @@ animation : ${circlePit} 2s;
 
 const DEFAULT_CMD = 'C/users/SKYPRO_REACT>'
 
-export default function Console({color, ...props}) {
+export default function Console({...props}) {
+  const theme = useThemeContext()
   const [lines, setLines] = useState([DEFAULT_CMD])
   const [line, setLine] = useState('')
   
@@ -59,7 +61,7 @@ export default function Console({color, ...props}) {
       />
       {lines.map(item => <Line key={crypto.randomUUID()}>{item}</Line>)}
       <StyledConsole
-        color={color}
+        color={theme.color}
         onKeyPress={onKeyPress}
         {...props}
         ref={AreaRef}
