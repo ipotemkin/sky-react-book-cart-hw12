@@ -1,41 +1,71 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState } from 'react'
+/* eslint-disable react/function-component-definition */
+
+import { useState, useRef } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Line from './Line'
+import ResetButton from './reset-button'
 
 const circlePit = keyframes`
 transform : rotateZ()
 `
 
 const StyledConsole = styled.textarea`
- width: 100%
- height: 70vh;
- background: black;
- font-size: 24px;
- border: none;
- resize: none;
- &:focus{
-   outline:none
- }
- animation : ${circlePit} 2s
+width: 100%;
+height: 70vh;
+
+background: black;
+
+border: none;
+resize: none;
+ 
+color: ${(props) => props.color || 'green'};
+ 
+animation : ${circlePit} 2s;
+
+&:focus { outline:none; }
 `
 
-const Console = (color, ...props) => {
-  const [lines, setLines] = useState(['C/users/SKYPRO_REACT>'])
+const DEFAULT_CMD = 'C/users/SKYPRO_REACT>'
 
-  const onKeyPress = (e) => {
+export default function Console({color, ...props}) {
+  const [lines, setLines] = useState([DEFAULT_CMD])
+  const [line, setLine] = useState('')
+  
+  const AreaRef = useRef()
+
+  const onKeyPress = e => {
     if (e.charCode === 13) {
-      setLines([...lines, 'C/users/SKYPRO_REACT>'])
+      e.preventDefault()
+      setLines([...lines, e.target.value, DEFAULT_CMD])
+      setLine('')
     }
   }
 
+  const onReset = () => {
+    setLines([DEFAULT_CMD])
+    setLine('')
+    AreaRef.current.focus()
+  }
+
+  const onChange = e => setLine(e.target.value)
+
   return (
-    <div>
-      {lines.map((line) => (
-        <Line>{line}</Line>
-      ))}
-      <StyledConsole color={color} onKeyPress={onKeyPress} {...props} />
+    <div style={{ height: '100vh' }}>
+      <ResetButton
+        text='RESET'
+        onClick={onReset}
+        disabled={ line || lines.length > 1 ? '' : 'disabled' }
+      />
+      {lines.map(item => <Line key={crypto.randomUUID()}>{item}</Line>)}
+      <StyledConsole
+        color={color}
+        onKeyPress={onKeyPress}
+        {...props}
+        ref={AreaRef}
+        onChange={onChange}
+        value={line}
+      />
     </div>
   )
 }
-export default Console
