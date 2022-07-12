@@ -3,7 +3,7 @@ import { useThemeContext } from "../../context/theme"
 
 
 const ResetButton = ({text, onClick, disabled}) => {
-  const theme = useThemeContext()
+  const { theme } = useThemeContext()
 
   return (
     <S.ResetButton

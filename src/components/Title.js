@@ -8,7 +8,7 @@ const StyledTitle = styled.h1`
 `
 
 const Title = (props) => {
-  const theme = useThemeContext()
+  const { theme } = useThemeContext()
 
   return <StyledTitle color={theme.color} {...props} />
 }

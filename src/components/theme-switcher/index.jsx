@@ -1,14 +1,14 @@
 import { useThemeContext } from "../../context/theme"
 import  * as S from "./styles"
 
-const ThemeSwitcher = ({onClick}) => {
-  const theme = useThemeContext()
+const ThemeSwitcher = () => {
+  const { theme, toggleTheme } = useThemeContext()
 
   return (
     <S.ThemeSwitcher
       type="button"
       color={theme.color}
-      onClick={onClick}
+      onClick={toggleTheme}
     >
       Toggle theme
     </S.ThemeSwitcher>

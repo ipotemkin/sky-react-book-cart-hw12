@@ -9,7 +9,7 @@ const StyledTitle = styled.div`
 `
 
 const Line = props => {
-  const theme = useThemeContext()
+  const { theme } = useThemeContext()
   
   return <StyledTitle color={theme.color} {...props} />
 }

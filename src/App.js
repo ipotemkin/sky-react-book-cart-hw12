@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
+
 import { useState } from 'react'
 
 import Console from './components/Console'
@@ -18,10 +20,10 @@ const App = () => {
   }
   
   return (
-    <ThemeContext.Provider value={currentTheme}>
+    <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
       <AppWrapper>
         <GlobalStyle />
-        <ThemeSwitcher onClick={toggleTheme} />
+        <ThemeSwitcher />
         <Title>Console CMD. SKYPRO_REACT</Title>
         <Console />
       </AppWrapper>

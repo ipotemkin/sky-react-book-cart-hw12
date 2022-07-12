@@ -30,7 +30,7 @@ animation : ${circlePit} 2s;
 const DEFAULT_CMD = 'C/users/SKYPRO_REACT>'
 
 export default function Console({...props}) {
-  const theme = useThemeContext()
+  const { theme } = useThemeContext()
   const [lines, setLines] = useState([DEFAULT_CMD])
   const [line, setLine] = useState('')
   

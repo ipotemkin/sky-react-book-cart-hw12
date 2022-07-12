@@ -7,7 +7,10 @@ export const themes = {
     orange: { color: 'orange' }
 }
 
-export const ThemeContext = React.createContext(themes.green)
+export const ThemeContext = React.createContext({
+    theme: themes.green,
+    toggleTheme: () => {},
+})
 
 export const useThemeContext = () => {
     const theme = useContext(ThemeContext)
